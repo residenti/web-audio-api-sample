@@ -7,7 +7,7 @@ let isPlaying = false;
 document.querySelector("#play").addEventListener("click", () => {
   // 再生中なら二重に再生されないようにする
   if (isPlaying) return;
-  oscillator = ctx.createOscillator();
+  oscillator = ctx.createOscillator(); // OscillatorNodeは再生のたびに生成する必要がある
   oscillator.type = "sine"; // sine, square, sawtooth, triangleがある
   oscillator.frequency.setValueAtTime(440, ctx.currentTime); // 440HzはA4(4番目のラ)
   oscillator.connect(ctx.destination);
