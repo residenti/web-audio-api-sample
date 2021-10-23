@@ -1,3 +1,5 @@
 # web-audio-api-sample
 
 [音を操るWeb技術 - Web Audio API入門 - ICS MEDIA](https://ics.media/entry/200427/)を手元で動かしてみた。
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2911323c-8b31-4d0e-9136-c3192eb8e2a8/deploy-status)](https://app.netlify.com/sites/vigilant-hypatia-3fd388/deploys)
