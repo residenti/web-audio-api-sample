@@ -1,20 +1,39 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 const ctx = new AudioContext();
 
-const audioElement = document.querySelector("audio");
-// Web Audio API内で使える形に変換
-const track = ctx.createMediaElementSource(audioElement);
+let sampleSource;
+// 再生中のときはtrue
+let isPlaying = false;
 
-document.querySelector("#play").addEventListener("click", () => {
-    if(ctx.state === "suspended") {
-        ctx.resume();
-    }
-    // 出力につなげる
-    track.connect(ctx.destination);
-    audioElement.play();
+// 音源を取得しAudioBuffer形式に変換して返す関数
+async function setupSample() {
+  const response = await fetch("../../assets/sample.mp3");
+  const arrayBuffer = await response.arrayBuffer();
+  // Web Audio APIで使える形式に変換
+  const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+  return audioBuffer;
+}
+
+// AudioBufferをctxに接続し再生する関数
+function playSample(ctx, audioBuffer) {
+  sampleSource = ctx.createBufferSource();
+  // 変換されたバッファーを音源として設定
+  sampleSource.buffer = audioBuffer;
+  // 出力につなげる
+  sampleSource.connect(ctx.destination);
+  sampleSource.start();
+  isPlaying = true;
+}
+
+document.querySelector("#play").addEventListener("click", async () => {
+  // 再生中なら二重に再生されないようにする
+  if (isPlaying) return;
+  const sample = await setupSample();
+  playSample(ctx, sample);
 });
 
-// audioElementを一時停止する
-document.querySelector("#pause").addEventListener("click", () => {
-    audioElement.pause();
+// oscillatorを破棄し再生を停止する
+document.querySelector("#stop").addEventListener("click", async () => {
+  sampleSource?.stop();
+  isPlaying = false;
 });
