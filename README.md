@@ -6,4 +6,5 @@
 
 1. [Audio](https://vigilant-hypatia-3fd388.netlify.app/app/audio/index.html)
 2. [Oscillator](https://vigilant-hypatia-3fd388.netlify.app/app/oscillator/index.html)
-2. [Effect](https://vigilant-hypatia-3fd388.netlify.app/app/effect/index.html)
+3. [Effect](https://vigilant-hypatia-3fd388.netlify.app/app/effect/index.html)
+4. [Effect with Fabricjs](https://vigilant-hypatia-3fd388.netlify.app/app/fabric/index.html)
