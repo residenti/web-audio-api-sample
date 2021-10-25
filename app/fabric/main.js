@@ -50,10 +50,14 @@ const circle = new fabric.Circle({
 circle.on('mouseup', (e) => {
   const distance = calcDistance(e);
   console.log('distance', distance);
-  if (distance > 100) {
+
+  if (distance > 200) {
     gainNode.gain.value = 0;
+    return;
   } else {
-    gainNode.gain.value = 0.5;
+    const volume = (200 / distance) * 0.1
+    console.log('volume', volume);
+    gainNode.gain.value = volume;
   }
 });
 canvas.add(circle);
